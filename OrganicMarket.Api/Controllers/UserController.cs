@@ -52,7 +52,7 @@ namespace OrganicMarket.Api.Controllers
             return Ok(result);
         }
 
-
+        [AllowAnonymous]
         [HttpGet("")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
