@@ -20,13 +20,14 @@ namespace MusicMarket.Services
         public readonly JwtSettings _jwtSettings;
         public UserService(IUnitOfWork unitOfWork, JwtSettings jwtSettings)
         {
-            this._unitOfWork = unitOfWork;
-            this._jwtSettings = jwtSettings;
+            _unitOfWork = unitOfWork;
+            _jwtSettings = jwtSettings;
         }
 
         public async Task<AuthenticationResult> Post(User newUser)
         {
-            if (_unitOfWork.User.GetAll().Any((item) => item.NickName == newUser.NickName || item.Email == newUser.Email))
+            if (_unitOfWork.User.Find((item) => item.NickName == newUser.NickName || 
+                        item.Email == newUser.Email).Any())
             {
                 return new AuthenticationResult
                 {
